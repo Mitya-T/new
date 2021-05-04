@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Sign in</h1>
+
+    <!-- IMPORT OF A SCRIPT THAT SOLVES THE PROBLEM OF DISPLAY https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/#forms-in-templates -->
+    {% from "_formhelpers.html" import render_field %}
+
+    <form method=post>
+      {{form.hidden_tag()}}
+      <dl>
+        {{form.email.label}} <br>
+        {{render_field(form.email, onchange="getInputValue()")}} <br>
+
+
+
+        {{form.password.label}} <a href="{{url_for('register')}}">Forgot your password?</a>
+        {{render_field(form.password)}}
+        {{form.show_password.label}} {{form.show_password}} <br>
+
+        {{form.submit(class="btn btn-warning")}}
+      </dl>
+
+    </form>
+
+    <br>
+    By signing in you are agreeing to our <a href="{{url_for('cond')}}">Condition of Use</a> <br>
+    and our <a href="{{url_for('privacy_notice')}}">Privacy Notice</a>
+    <hr>
+
+    <input type="button" class="btn btn-secondary" onclick="location.href='{{url_for('register')}}';" value="I am a new customer" />
+
+
+    <br> <br>Changed email? <a href="{{url_for('update_email')}}">Update it here</a>
+
+  <script type="text/javascript">
+    window.addEventListener("load", function(){
+      var checkbox  = document.getElementById('{{form.show_password.id}}');
+      var x = document.getElementById('{{form.password.id}}');
+      checkbox.addEventListener('change', function() {
+          if(this.checked) {
+              x.type = 'text';
+          } else {
+              x.type = 'password';
+          }
+      });
+    });
+  </script>
+
+
+  <script>
+      function getInputValue(){
+          var inputVal = document.getElementById('{{form.email.id}}').value;
+
+          const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          resultat = re.test(inputVal);
+
+
+          if (resultat == false) {
+
+              alert(inputVal+" is NOT an email, please enter valid email");
+              }
+              return false;
+          }
+  </script>
+
+
+{% endblock %}

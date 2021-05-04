@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Condition of use:</h1>
+
+
+
+<div class="container-fluid">
+  <h1 class="text-black text-center m-5">Terms of Use:</h1>
+  <h1 class="text-black text-center">First page</h1>
+  <h1 class="display-1 text-black text-center m-5">1</h1>
+
+
+
+
+
+</div>
+
+<nav>
+  <ul class="pagination justify-content-center fixed-bottom mb-5">
+    <li class="page-item disabled" title="Previous">
+      <a href="" class="page-link rounded-circle m-1"> <i class="fas fa-chevron-left text-primary"></i>  </a>
+    </li>
+    <li class="page-item active"><a href="{{url_for('cond')}}" class="page-link rounded-circle m-1">1</a> </li>
+    <li class="page-item"><a href="{{url_for('cond2')}}" class="page-link rounded-circle m-1">2</a> </li>
+    <li class="page-item"><a href="{{url_for('cond3')}}" class="page-link rounded-circle m-1">3</a> </li>
+    <li class="page-item"><a href="{{url_for('cond4')}}" class="page-link rounded-circle m-1">4</a> </li>
+    <li class="page-item"><a href="{{url_for('cond5')}}" class="page-link rounded-circle m-1">5</a> </li>
+    <li class="page-item" title="Next">
+      <a href="{{url_for('cond2')}}" class="page-link rounded-circle m-1"> <i class="fas fa-chevron-right text-primary"></i>  </a>
+    </li>
+
+  </ul>
+</nav>
+
+<div id="target">
+
+<p>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<p>
+These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and [business entity name] (“we,” “us” or “our”), concerning your access to and use of the [website name.com] website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”).
+</p>
+
+<p>
+You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms and Conditions. If you do not agree with all of these Terms and Conditions, then you are expressly prohibited from using the Site and you must discontinue use immediately.
+</p>
+
+
+Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms and Conditions at any time and for any reason.
+
+We will alert you about any changes by updating the “Last updated” date of these Terms and Conditions, and you waive any right to receive specific notice of each such change.
+
+
+</div>
+
+<!-- <img src="../static/condition_of_use.png" alt=""> -->
+
+<a href="{{url_for('login')}}">Back to login</a>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h2>Chrysalis 4</h2>
+
+  <div class="jumbotron">
+    {% if current_user.is_authenticated %}
+
+      <p>Hello {{current_user.first_name}} {{current_user.last_name}}</p><br>
+      <p>Your phone number is {{current_user.phone}}</p>
+      <p>Your birthdate is {{current_user.dob}}</p>
+
+      <h3>all other info is accessed through current_user...</h3>
+
+
+
+
+
+
+
+    {% else %}
+
+      <p>Please login or register!</p>
+
+    {% endif %}
+  </div>
+
+
+
+{% endblock %}

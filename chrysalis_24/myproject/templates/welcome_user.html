@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+  <div class="jumbotron">
+      <p>Congrats {{current_user.first_name}}!  U R logged in!</p>
+  </div>
+
+Click <a href="{{url_for('create_project')}}">here</a> to fill the project form:
+
+
+
+{% endblock %}

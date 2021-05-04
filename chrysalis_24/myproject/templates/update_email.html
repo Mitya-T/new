@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Update you email page:</h1>
+
+<div class="jumbotron">
+  {% if current_user.is_authenticated %}
+
+    <p>Hello {{current_user.first_name}} {{current_user.last_name}}</p><br>
+    <p>Your date of birth is {{current_user.dob}}</p><br>
+    <p>Your current email is {{current_user.email}}</p>
+    <p>Your current telephone is {{current_user.phone}}</p>
+
+    <p>Please update your email here:</p>
+
+    <p>Your current password is {{current_user.password_hash}}</p>
+
+  {% else %}
+
+    <p>To update your email you have to login or register first!</p>
+
+  {% endif %}
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Registration Form</h1> <br>
+
+<!-- IMPORT OF A SCRIPT THAT SOLVES THE PROBLEM OF DISPLAY https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/#forms-in-templates -->
+{% from "_formhelpers.html" import render_field %}
+
+  <form method="POST">
+    {{form.hidden_tag()}}
+
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2"><h2>Personal Info</h2></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{form.first_name.label}}</td>
+                <td>{{render_field(form.first_name, onchange="verifFirstName()")}}</td>
+            </tr>
+            <tr>
+                <td>{{form.last_name.label}}</td>
+                <td>{{render_field(form.last_name, onchange="verifLastName()")}}</td>
+            </tr>
+            <tr>
+                <td>{{form.dob.label}}</td>
+                <td>{{render_field(form.dob)}}</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th colspan="2"><h2>Account Info</h2></th>
+            </tr>
+        </thead>
+            <tr>
+                <td>{{form.email.label}}</td>
+
+                <td>{{render_field(form.email, onchange="getInputValue()")}}</td>
+
+                <!-- A verification button that verifies the integrity of email (just in case) -->
+               <!-- <td><button type="button" onclick="getInputValue();">check email</button></td> -->
+            </tr>
+            <tr>
+                <td>{{form.email_confirm.label}}</td>
+                <td>{{render_field(form.email_confirm)}}</td>
+            </tr>
+            <tr>
+                <td>{{form.password.label}}</td>
+                <td>{{render_field(form.password)}} </td>
+                <td>{{form.show_password.label}} {{form.show_password}}</td>
+
+            </tr>
+
+        <thead>
+            <tr>
+                <th colspan="2"><h2>Contact Info</h2></th>
+            </tr>
+        </thead>
+            <tr>
+                <td>{{form.address.label}}</td>
+                <td>{{render_field(form.address)}}</td>
+            </tr>
+            <tr>
+                <td>{{form.city.label}}</td>
+                <td>{{render_field(form.city)}}</td>
+            </tr>
+            <tr>
+                <td>{{form.phone.label}}</td>
+                <td>{{render_field(phone_form.phone)}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{form.submit(class="btn btn-warning")}}</td>
+            </tr>
+
+    </table>
+
+  </form>
+
+<hr>
+
+<script type="text/javascript">
+  window.addEventListener("load", function(){
+    var checkbox  = document.getElementById('{{form.show_password.id}}');
+    var x = document.getElementById('{{form.password.id}}');
+    checkbox.addEventListener('change', function() {
+        if(this.checked) {
+            x.type = 'text';
+        } else {
+            x.type = 'password';
+        }
+    });
+  });
+</script>
+
+
+<script>
+    function getInputValue(){
+        // Selecting the input element and get its value
+        var inputVal = document.getElementById('{{form.email.id}}').value;
+
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // return re.test(inputVal);
+        resultat = re.test(inputVal);
+        // document.write(resultat);
+
+        // if (resultat) {
+        //     alert(inputVal+" is valid");
+        //     } else {
+        //     alert(inputVal+" is NOT valid");
+        //     }
+        //     return false;
+        // }
+
+        if (resultat == false) {
+
+            alert(inputVal+" is NOT valid");
+            }
+            return false;
+        }
+</script>
+
+<script>
+    function verifFirstName(){
+        var inputVal = document.getElementById('{{form.first_name.id}}').value;
+        // const re = /^[0-9]*$/gm; // check if ONLY numbers
+        const re = /^[a-zA-Z]+$/; // check if ONLY characters
+        resultat = re.test(inputVal);
+
+        if (resultat == false) {
+
+            alert("There is a number in your FIRST name: " + inputVal+", are you sure?");
+            }
+            return false;
+        }
+</script>
+
+<script>
+    function verifLastName(){
+        var inputVal = document.getElementById('{{form.last_name.id}}').value;
+        // const re = /^[0-9]*$/gm; // check if ONLY numbers
+        const re = /^[a-zA-Z]+$/; // check if ONLY characters
+        resultat = re.test(inputVal);
+
+        if (resultat == false) {
+
+            alert("There is a number in your LAST name: " + inputVal+", are you sure?");
+            }
+            return false;
+        }
+</script>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        var wtf_phone_field = document.getElementById('phone');
+        wtf_phone_field.style.position = 'absolute';
+        wtf_phone_field.style.top = '-9999px';
+        wtf_phone_field.style.left = '-9999px';
+        wtf_phone_field.parentElement.insertAdjacentHTML('beforeend', '<div><input type="tel" id="_phone"></div>');
+        var fancy_phone_field = document.getElementById('_phone');
+        var fancy_phone_iti = window.intlTelInput(fancy_phone_field, {
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.4/js/utils.js",
+        });
+        fancy_phone_iti.setNumber(wtf_phone_field.value);
+        fancy_phone_field.addEventListener('blur', function() {
+            wtf_phone_field.value = fancy_phone_iti.getNumber();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <div align="center">
+      <h1>Welcome to the page for {{user.first_name}}</h1>
+
+    </div>
+
+  </div>
+USER PROJECTS <br>
+project ID
+<hr>
+{{projects}}
+<hr>
+USER
+<hr>
+{{user}}
+<hr>
+  {% for post in projects.items %}
+    <h2> <a href="{{url_for('project', project_id=post.id)}}">{{post.title}}</a> </h2>
+
+    <p class="text-muted">Published On: {{post.date.strftime("%Y-%m-%d")}}</p>
+
+    <br>
+    <p>Brief project details: {{post.text}}</p>
+    <br>
+
+    <br>
+    <p>Parameters chosen are: {{post.language}}</p>
+    <br>
+
+    <br>
+    <p>Protocol is {{post.protocol}}</p>
+    <br>
+
+    <br>
+    <p>You have chosen a {{post.format}} format</p>
+    <br>
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}
