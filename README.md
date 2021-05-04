@@ -1,3 +1,1 @@
-# new
-
-Chrysalis first operational app
+# Chrysalis first operational app
